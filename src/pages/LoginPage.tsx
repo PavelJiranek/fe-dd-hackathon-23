@@ -1,26 +1,26 @@
 import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import {
-    FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
-    Input,
     Box,
     Card,
     CardBody,
-    Text,
-    Center,
-    Button,
     CardFooter,
     CardHeader,
+    Center,
+    FormControl,
+    FormErrorMessage,
+    FormHelperText,
+    FormLabel,
     Heading,
+    Input,
     Stack,
+    Text,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 import { useBackendStore } from "../store/useBackendStore.js";
 import { AppRoutes } from "../constants/constants.js";
+import { FilledButton } from "../components/FilledButton.js";
 
 interface IFormInput {
     domain: string;
@@ -92,9 +92,7 @@ export const LoginPage: React.FC = () => {
                                 </Stack>
                             </CardBody>
                             <CardFooter justifyContent="flex-end">
-                                <Button type="submit" size="md" variant="solid" colorScheme="blue">
-                                    Continue
-                                </Button>
+                                <FilledButton type="submit">Continue</FilledButton>
                             </CardFooter>
                         </FormControl>
                     </form>

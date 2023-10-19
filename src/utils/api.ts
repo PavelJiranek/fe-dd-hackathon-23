@@ -16,8 +16,18 @@ export const fetchWorkspaces = async (token: string, workspaceId?: string) => {
     return await response.json();
 };
 
-export const createWorkspace = async (token: string, id: string, name: string) => {
-    const response = await fetch(`${BE_API_HOST}/ws?action=create&id=${id}&name=${name}`, {
+export const createWorkspace = async (token: string, id: string, name: string, parentId: string) => {
+    const url = new URL(`${BE_API_HOST}/ws`);
+    url.searchParams.append("action", "create");
+    url.searchParams.append("id", id);
+    if (parentId) {
+        url.searchParams.append("parent", parentId);
+    }
+    if (name) {
+        url.searchParams.append("name", name);
+    }
+
+    const response = await fetch(url, {
         headers: {
             Authorization: `Bearer ${token}`,
         },

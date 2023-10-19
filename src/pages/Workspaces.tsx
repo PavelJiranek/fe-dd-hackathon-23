@@ -18,23 +18,26 @@ export const Workspaces: FC = () => {
         <Layout>
             <Stack>
                 <BreadCrumb />
-                {loading ? <CenteredLoading /> : <WorkspacesList workspaces={workspaces} />}
                 <BasicModal
                     modalTitle={"New workspace"}
                     type={"input"}
                     openerLabel={"+ New workspace"}
                     primaryButtonLabel={"Create"}
                     primaryButtonAction={(val) => {
-                        return createWorkspace(token, val["Name"], val["Parent ID (optional)"]).then((data) =>
-                            console.log(data),
-                        );
+                        return createWorkspace(
+                            token,
+                            val["ID"],
+                            val["Name"],
+                            val["Parent ID (optional)"],
+                        ).then((data) => console.log(data));
                     }}
                     content={[
-                        { id: "name", label: "Name", placeholder: "workspace" },
-                        { id: "name", label: "Parent ID (optional)", placeholder: "parent_ID" },
+                        { id: "name", label: "Name", placeholder: "Workspace name" },
+                        { id: "id", label: "ID", placeholder: "Workspace ID" },
+                        { id: "parentId", label: "Parent ID (optional)", placeholder: "Parent ID" },
                     ]}
                 />
-                <WorkspacesList />
+                {loading ? <CenteredLoading /> : <WorkspacesList workspaces={workspaces} />}
             </Stack>
         </Layout>
     );

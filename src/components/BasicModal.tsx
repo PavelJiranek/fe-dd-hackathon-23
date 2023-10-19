@@ -1,20 +1,20 @@
 import React from "react";
 import {
+    Box,
+    FormLabel,
+    Input,
     Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
     ModalBody,
     ModalCloseButton,
-    useDisclosure,
-    Input,
-    Text,
-    FormLabel,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
     Radio,
-    Stack,
     RadioGroup,
-    Box,
+    Stack,
+    Text,
+    useDisclosure,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 
@@ -45,6 +45,11 @@ export const BasicModal: React.FC<IModal> = ({
     const [value, setValue] = React.useState("");
     const { register, handleSubmit } = useForm();
 
+    // const handleFormSubmit = () => {
+    //     handleSubmit(primaryButtonAction);
+    //     onClose();
+    // };
+
     return (
         <>
             <Box justifyContent={"flex-end"} display={"flex"} marginBottom={"1rem"}>
@@ -54,6 +59,7 @@ export const BasicModal: React.FC<IModal> = ({
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
+                    {/*<form onSubmit={handleFormSubmit}>*/}
                     <form onSubmit={handleSubmit(primaryButtonAction)}>
                         <ModalHeader>{modalTitle}</ModalHeader>
                         <ModalCloseButton />
