@@ -1,4 +1,7 @@
 export enum AppRoutes {
+    Environments = "/environments",
+    Workspaces = "/workspaces",
+    UserFilters = "/user-filters",
     Login = "/login",
     Home = "/",
 }
