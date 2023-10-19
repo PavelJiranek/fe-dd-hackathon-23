@@ -1,5 +1,6 @@
 // (C) 2007-2022 GoodData Corporation
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Dotenv = require('dotenv-webpack');
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const { DefinePlugin } = require("webpack");
 const path = require("path");
@@ -114,6 +115,7 @@ module.exports = (_env, argv) => {
                 ].filter(Boolean),
             },
             plugins: [
+                new Dotenv(),
                 new CaseSensitivePathsPlugin(),
                 new DefinePlugin({
                     WORKSPACE_ID: JSON.stringify(WORKSPACE_ID),

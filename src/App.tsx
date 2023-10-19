@@ -1,45 +1,24 @@
-// (C) 2019-2023 GoodData Corporation
+// (C) 2023 GoodData Corporation
+
+import {LoginPage} from "./pages/LoginPage.js";
 import React from "react";
-import { BackendProvider, WorkspaceProvider } from "@gooddata/sdk-ui";
-import { InsightView } from "@gooddata/sdk-ui-ext";
-
-import { backend } from "./backend.js";
-import * as Md from "./catalog.js";
-import img from "./assets/gooddata-logo.svg";
-
-// Workspace ID is injected by WebPack based on the value in package.json
-const workspaceId = WORKSPACE_ID;
+import {useBackendStore} from "./store/useBackendStore.js";
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {AppRoutes} from "./constants/constants.js";
+import {PrivateRoute} from "./components/PrivateRoute.js";
 
 export const App: React.FC = () => {
+    const store = useBackendStore();
+
+    const {} = store;
+    console.log(store)
+
     return (
-        <BackendProvider backend={backend}>
-            <WorkspaceProvider workspace={workspaceId}>
-                <div className="app">
-                    <h1>Hello Data Dragons!</h1>
-                    <p>
-                        Edit <code>/src/App.tsx</code> to get started. Learn more about this
-                        template in <code>README.md</code>.
-                    </p>
-                    <pre>
-                        <code>
-                            &lt;InsightView insight=&#123;Md.Insights.ProductCategoriesPieChart&#125; /&gt;
-                        </code>
-                    </pre>
-                    <figure>
-                        <InsightView insight={Md.Insights.ProductCategoriesPieChart} showTitle />
-                    </figure>
-                    <footer>
-                        <img src={img} alt="" />
-                        <a
-                            target="_blank"
-                            rel="noreferrer"
-                            href="https://sdk.gooddata.com/gooddata-ui/docs/about_gooddataui.html"
-                        >
-                            GoodData.UI docs
-                        </a>
-                    </footer>
-                </div>
-            </WorkspaceProvider>
-        </BackendProvider>
-    );
+        <BrowserRouter>
+          <Routes>
+              <Route path={AppRoutes.Home} element={<PrivateRoute><>Home</></PrivateRoute>}/>
+                <Route path={AppRoutes.Login} Component={LoginPage} />
+            </Routes>
+        </BrowserRouter>
+    )
 };

@@ -70,7 +70,7 @@ export const ProductCategory: IAttribute = newAttribute("products.category");
 export const Region: IAttribute = newAttribute("region");
 /**
  * Attribute Title: State
- * Attribute ID: state
+ * Attribute ID: store
  */
 export const State = {
   /**
@@ -80,7 +80,7 @@ export const State = {
   Location: newAttribute("geo__state__location")
   /**
    * Display Form Title: State
-   * Display Form ID: state
+   * Display Form ID: store
    */,
   Default: newAttribute("state"),
 };
