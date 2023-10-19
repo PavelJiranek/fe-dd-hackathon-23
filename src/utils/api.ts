@@ -35,3 +35,17 @@ export const createWorkspace = async (token: string, id: string, name: string, p
 
     return await response.json();
 };
+
+export const deleteWorkspace = async (token: string, id: string) => {
+    const url = new URL(`${BE_API_HOST}/ws`);
+    url.searchParams.append("action", "delete");
+    url.searchParams.append("id", id);
+
+    const response = await fetch(url, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    return await response.json();
+};
