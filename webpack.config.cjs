@@ -13,7 +13,6 @@ const BACKEND_URL = process.env.GOODDATA_HOST;
 
 module.exports = (_env, argv) => {
     const isProduction = argv.mode === "production";
-    const protocol = new URL(BACKEND_URL).protocol;
     const proxy = [
         {
             context: (pathname) => /^\/(api\/|gdc\/|account\.html|truste\.html|account\/)/.test(pathname),
@@ -138,7 +137,7 @@ module.exports = (_env, argv) => {
                 },
                 host: "127.0.0.1",
                 proxy,
-                server: protocol === "https:" ? "https" : "http",
+                server: "https",
                 open: true,
                 historyApiFallback: true,
             },
