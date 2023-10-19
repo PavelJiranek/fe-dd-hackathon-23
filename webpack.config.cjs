@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const path = require("path");
-const { URL } = require("url");
 const pack = require("./package.json");
 const CopyPlugin = require("copy-webpack-plugin");
 
@@ -113,7 +112,9 @@ module.exports = (_env, argv) => {
                 ].filter(Boolean),
             },
             plugins: [
-                new Dotenv(),
+                new Dotenv({
+                    systemvars: true,
+                }),
                 new CaseSensitivePathsPlugin(),
                 new HtmlWebpackPlugin({
                     template: "./src/public/index.html",
