@@ -4,29 +4,6 @@ import { useBackendStore } from "../store/useBackendStore.js";
 import { fetchWorkspaces } from "../utils/api.js";
 import { IWorkspace } from "../types/workspaces.js";
 
-const defaultWorkspaces: IWorkspace[] = [
-    {
-        id: "a318879ef4e043d6958ef7eae898c0dd",
-        name: "NLG scenario",
-        parent_id: null,
-        children: [],
-    },
-    {
-        id: "production",
-        name: "(Admin) - Vasco PROD",
-        parent_id: null,
-        children: [
-            {
-                id: "test",
-                name: "Child workspace",
-                parent_id: "production",
-                children: [{ id: "Grandtest", name: "Child workspace", parent_id: "test", children: [] }],
-            },
-        ],
-    },
-    { id: "ws-snowflake-demo", name: "GoodData Demo", parent_id: null, children: [] },
-];
-
 export const useWorkspaces = () => {
     const { token } = useBackendStore();
     const [workspaces, setWorkspaces] = useState<IWorkspace[]>([]);
@@ -42,6 +19,5 @@ export const useWorkspaces = () => {
         })();
     }, [token]);
 
-    return workspaces.length ? workspaces : defaultWorkspaces;
-    // return workspaces;
+    return workspaces;
 };
