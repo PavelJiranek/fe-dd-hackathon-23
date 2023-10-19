@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEventHandler } from "react";
 import {
     Box,
     FormLabel,
@@ -23,13 +23,14 @@ import { FilledButton } from "./FilledButton.js";
 
 interface IModal {
     type: "input" | "radio";
-    content: { label: string; placeholder?: string; id: string }[];
+    content: { label: string; placeholder?: string; id: string; required?: boolean }[];
     primaryButtonLabel: string;
     /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     primaryButtonAction: (val: any) => Promise<void>;
     modalTitle: string;
     openerLabel: string;
     openerType?: "filled" | "outline";
+    submittingText?: string;
 }
 
 export const BasicModal: React.FC<IModal> = ({
@@ -40,15 +41,21 @@ export const BasicModal: React.FC<IModal> = ({
     modalTitle,
     openerLabel,
     openerType = "filled",
+    submittingText,
 }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [value, setValue] = React.useState("");
     const { register, handleSubmit } = useForm();
+    const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-    // const handleFormSubmit = () => {
-    //     handleSubmit(primaryButtonAction);
-    //     onClose();
-    // };
+    const handleFormSubmit: FormEventHandler = async (e) => {
+        setIsSubmitting(true);
+        e.preventDefault();
+        const submitFn = handleSubmit(primaryButtonAction);
+        await submitFn(e);
+        onClose();
+        setIsSubmitting(false);
+    };
 
     return (
         <>
@@ -59,8 +66,7 @@ export const BasicModal: React.FC<IModal> = ({
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    {/*<form onSubmit={handleFormSubmit}>*/}
-                    <form onSubmit={handleSubmit(primaryButtonAction)}>
+                    <form onSubmit={handleFormSubmit}>
                         <ModalHeader>{modalTitle}</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
@@ -87,14 +93,20 @@ export const BasicModal: React.FC<IModal> = ({
                                             <Text>
                                                 <FormLabel>{item.label}</FormLabel>
                                             </Text>
-                                            <Input {...register(item.label)} placeholder={item.placeholder} />
+                                            <Input
+                                                {...register(item.label, { required: item.required })}
+                                                required={item.required}
+                                                placeholder={item.placeholder}
+                                            />
                                         </Stack>
                                     ))}
                                 </>
                             )}
                         </ModalBody>
                         <ModalFooter>
-                            <FilledButton type="submit">{primaryButtonLabel}</FilledButton>
+                            <FilledButton isLoading={isSubmitting} loadingText={submittingText} type="submit">
+                                {primaryButtonLabel}
+                            </FilledButton>
                             <OutlineButton onClick={onClose}>Cancel</OutlineButton>
                         </ModalFooter>
                     </form>

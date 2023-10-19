@@ -5,8 +5,12 @@ export const FilledButton: React.FC<{
     onClick?: () => void;
     children: React.ReactNode;
     type?: "button" | "submit" | "reset";
-}> = ({ onClick, children, type = "button" }) => (
+    isLoading?: boolean;
+    loadingText?: string;
+}> = ({ onClick, children, type = "button", loadingText, isLoading = false }) => (
     <Button
+        isLoading={isLoading}
+        loadingText={loadingText}
         backgroundColor={"primary"}
         color={"white"}
         _hover={{ backgroundColor: "primaryDarker" }}

@@ -11,7 +11,7 @@ import { createWorkspace } from "../utils/api.js";
 import { useBackendStore } from "../store/useBackendStore.js";
 
 export const Workspaces: FC = () => {
-    const { workspaces, loading } = useWorkspaces();
+    const { workspaces, loading, refreshWorkspaces } = useWorkspaces();
 
     const { token } = useBackendStore();
     return (
@@ -27,15 +27,19 @@ export const Workspaces: FC = () => {
                         return createWorkspace(
                             token,
                             val["ID"],
-                            val["Name"],
+                            val["Name (optional)"],
                             val["Parent ID (optional)"],
-                        ).then((data) => console.log(data));
+                        ).then((data) => {
+                            console.log(data);
+                            refreshWorkspaces();
+                        });
                     }}
                     content={[
-                        { id: "name", label: "Name", placeholder: "Workspace name" },
-                        { id: "id", label: "ID", placeholder: "Workspace ID" },
+                        { id: "id", label: "ID", placeholder: "Workspace ID", required: true },
+                        { id: "name", label: "Name (optional)", placeholder: "Workspace name" },
                         { id: "parentId", label: "Parent ID (optional)", placeholder: "Parent ID" },
                     ]}
+                    submittingText={"Creating workspace..."}
                 />
                 {loading ? <CenteredLoading /> : <WorkspacesList workspaces={workspaces} />}
             </Stack>

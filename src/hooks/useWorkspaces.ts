@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { useBackendStore } from "../store/useBackendStore.js";
 import { fetchWorkspaces } from "../utils/api.js";
@@ -9,18 +9,20 @@ export const useWorkspaces = (parentWorkspaceId?: string) => {
     const [workspaces, setWorkspaces] = useState<IWorkspace[]>([]);
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        (async () => {
-            setLoading(true);
-            try {
-                const wsResult = await fetchWorkspaces(token, parentWorkspaceId);
-                setWorkspaces(wsResult);
-            } catch (error) {
-                console.error(error);
-            }
-            setLoading(false);
-        })();
+    const refreshWorkspaces = useCallback(async () => {
+        setLoading(true);
+        try {
+            const wsResult = await fetchWorkspaces(token, parentWorkspaceId);
+            setWorkspaces(wsResult);
+        } catch (error) {
+            console.error(error);
+        }
+        setLoading(false);
     }, [parentWorkspaceId, token]);
 
-    return { workspaces, loading };
+    useEffect(() => {
+        refreshWorkspaces();
+    }, [refreshWorkspaces]);
+
+    return { workspaces, loading, refreshWorkspaces };
 };
