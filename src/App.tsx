@@ -15,7 +15,7 @@ export const App: React.FC = () => {
         <BackendProvider backend={backend}>
             <WorkspaceProvider workspace={workspaceId}>
                 <div className="app">
-                    <h1>Hello GoodWorld!</h1>
+                    <h1>Hello Data Dragons!</h1>
                     <p>
                         Edit <code>/src/App.tsx</code> to get started. Learn more about this
                         template in <code>README.md</code>.

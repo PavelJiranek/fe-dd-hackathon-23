@@ -20,6 +20,9 @@
         "refresh-md": "gdc-catalog-export"
     },
     "dependencies": {
+        "@chakra-ui/react": "^2.8.1",
+        "@emotion/react": "^11.11.1",
+        "@emotion/styled": "^11.11.0",
         "@gooddata/sdk-backend-base": "9.2.0",
         "@gooddata/sdk-backend-bear": "9.2.0",
         "@gooddata/sdk-backend-spi": "9.2.0",
@@ -32,8 +35,10 @@
         "@gooddata/sdk-ui-filters": "9.2.0",
         "@gooddata/sdk-ui-geo": "9.2.0",
         "@gooddata/sdk-ui-pivot": "9.2.0",
+        "framer-motion": "^10.16.4",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
+        "react-hook-form": "^7.47.0",
         "tslib": "^2.5.0"
     },
     "devDependencies": {
