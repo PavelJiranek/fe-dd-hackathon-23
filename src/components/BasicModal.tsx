@@ -14,16 +14,19 @@ import {
     Radio,
     Stack,
     RadioGroup,
+    Box,
 } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
 
 import { OutlineButton } from "./OutlineButton.js";
 import { FilledButton } from "./FilledButton.js";
 
 interface IModal {
     type: "input" | "radio";
-    content: { label: string; placeholder?: string }[];
+    content: { label: string; placeholder?: string; id: string }[];
     primaryButtonLabel: string;
-    primaryButtonAction: () => void;
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    primaryButtonAction: (val: any) => Promise<void>;
     modalTitle: string;
     openerLabel: string;
     openerType?: "filled" | "outline";
@@ -39,50 +42,56 @@ export const BasicModal: React.FC<IModal> = ({
     openerType = "filled",
 }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [value, setValue] = React.useState("1");
+    const [value, setValue] = React.useState("");
+    const { register, handleSubmit } = useForm();
+
     return (
         <>
-            {openerType === "filled" && <FilledButton onClick={onOpen}>{openerLabel}</FilledButton>}
-            {openerType === "outline" && <OutlineButton onClick={onOpen}>{openerLabel}</OutlineButton>}
+            <Box justifyContent={"flex-end"} display={"flex"} marginBottom={"1rem"}>
+                {openerType === "filled" && <FilledButton onClick={onOpen}>{openerLabel}</FilledButton>}
+                {openerType === "outline" && <OutlineButton onClick={onOpen}>{openerLabel}</OutlineButton>}
+            </Box>
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>{modalTitle}</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        {type === "radio" ? (
-                            <RadioGroup onChange={setValue} value={value}>
-                                <Stack direction="column" padding={"1.5rem"}>
-                                    {content.map((item) => (
-                                        <Radio
-                                            key={item.label}
-                                            value={item.label}
-                                            size={"lg"}
-                                            fontSize={"16px"}
-                                            colorScheme={"pink"}
-                                        >
-                                            {item.label}
-                                        </Radio>
-                                    ))}
-                                </Stack>
-                            </RadioGroup>
-                        ) : (
-                            <>
-                                {content.map((item) => (
-                                    <Stack key={item.label} paddingBottom={"1.5rem"}>
-                                        <Text>
-                                            <FormLabel>{item.label}</FormLabel>
-                                        </Text>
-                                        <Input placeholder={item.placeholder} />
+                    <form onSubmit={handleSubmit(primaryButtonAction)}>
+                        <ModalHeader>{modalTitle}</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            {type === "radio" ? (
+                                <RadioGroup onChange={setValue} value={value}>
+                                    <Stack direction="column" padding={"1.5rem"}>
+                                        {content.map((item) => (
+                                            <Radio
+                                                key={item.label}
+                                                value={item.label}
+                                                size={"lg"}
+                                                fontSize={"16px"}
+                                                colorScheme={"pink"}
+                                            >
+                                                {item.label}
+                                            </Radio>
+                                        ))}
                                     </Stack>
-                                ))}
-                            </>
-                        )}
-                    </ModalBody>
-                    <ModalFooter>
-                        <FilledButton onClick={primaryButtonAction}>{primaryButtonLabel}</FilledButton>
-                        <OutlineButton onClick={onClose}>Cancel</OutlineButton>
-                    </ModalFooter>
+                                </RadioGroup>
+                            ) : (
+                                <>
+                                    {content.map((item) => (
+                                        <Stack key={item.label} paddingBottom={"1.5rem"}>
+                                            <Text>
+                                                <FormLabel>{item.label}</FormLabel>
+                                            </Text>
+                                            <Input {...register(item.label)} placeholder={item.placeholder} />
+                                        </Stack>
+                                    ))}
+                                </>
+                            )}
+                        </ModalBody>
+                        <ModalFooter>
+                            <FilledButton type="submit">{primaryButtonLabel}</FilledButton>
+                            <OutlineButton onClick={onClose}>Cancel</OutlineButton>
+                        </ModalFooter>
+                    </form>
                 </ModalContent>
             </Modal>
         </>

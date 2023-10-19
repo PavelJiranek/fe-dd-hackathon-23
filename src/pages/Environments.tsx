@@ -8,18 +8,6 @@ export const Environments: FC = () => {
         <Layout>
             <h1>Environments</h1>
             <BasicModal
-                modalTitle={"New workspace"}
-                type={"input"}
-                openerLabel={"+ New workspace"}
-                primaryButtonLabel={"Create"}
-                primaryButtonAction={() => console.log("create")}
-                content={[
-                    { label: "Name", placeholder: "workspace" },
-                    { label: "Parent ID (optional)", placeholder: "parent_ID" },
-                ]}
-            />
-
-            <BasicModal
                 modalTitle={"New environment"}
                 type={"radio"}
                 openerType={"outline"}

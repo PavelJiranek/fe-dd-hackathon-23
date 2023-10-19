@@ -15,3 +15,13 @@ export const fetchWorkspaces = async (token: string, workspaceId?: string) => {
 
     return await response.json();
 };
+
+export const createWorkspace = async (token: string, id: string, name: string) => {
+    const response = await fetch(`${BE_API_HOST}/ws?action=create&id=${id}&name=${name}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    return await response.json();
+};
