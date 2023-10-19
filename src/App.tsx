@@ -1,17 +1,18 @@
 // (C) 2023 GoodData Corporation
 
-import { LoginPage } from "./pages/LoginPage.js";
 import React from "react";
-import { useBackendStore } from "./store/useBackendStore.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
+
+import { LoginPage } from "./pages/LoginPage.js";
+import { useBackendStore } from "./store/useBackendStore.js";
 import { AppRoutes } from "./constants/constants.js";
 import { PrivateRoute } from "./components/PrivateRoute.js";
-import { ChakraProvider } from "@chakra-ui/react";
+import { Home } from "./pages/Home.js";
 
 export const App: React.FC = () => {
     const store = useBackendStore();
 
-    const {} = store;
     console.log(store);
 
     return (
@@ -22,7 +23,7 @@ export const App: React.FC = () => {
                         path={AppRoutes.Home}
                         element={
                             <PrivateRoute>
-                                <>Home</>
+                                <Home />
                             </PrivateRoute>
                         }
                     />
