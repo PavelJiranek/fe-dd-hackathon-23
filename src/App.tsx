@@ -11,6 +11,7 @@ import { PrivateRoute } from "./components/PrivateRoute.js";
 import { Workspaces } from "./pages/Workspaces.js";
 import { Environments } from "./pages/Environments.js";
 import { UserFilters } from "./pages/UserFilters.js";
+import { WorkspaceDetail } from "./pages/WorkspaceDetail.js";
 
 const colors = {
     primary: "#D53F8C",
@@ -33,6 +34,14 @@ export const App: React.FC = () => {
                         element={
                             <PrivateRoute>
                                 <Workspaces />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path={`${AppRoutes.Workspaces}/:workspaceId`}
+                        element={
+                            <PrivateRoute>
+                                <WorkspaceDetail />
                             </PrivateRoute>
                         }
                     />

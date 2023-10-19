@@ -55,7 +55,7 @@ module.exports = (_env, argv) => {
                 library: {
                     type: "module",
                 },
-                publicPath: "auto",
+                publicPath: "/",
             },
             resolve: {
                 // Alias for ESM imports with .js suffix because

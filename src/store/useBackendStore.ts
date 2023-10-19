@@ -58,6 +58,7 @@ export const useBackendStore = create<IBackendStore>((set) => ({
             });
 
             const authenticated = !error && !!backend;
+            // const authenticated = backend.isAuthenticated(); // todo
 
             if (authenticated) {
                 try {

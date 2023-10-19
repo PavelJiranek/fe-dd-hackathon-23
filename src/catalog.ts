@@ -1,5 +1,5 @@
 /* eslint-disable */
-/* THIS FILE WAS AUTO-GENERATED USING CATALOG EXPORTER; YOU SHOULD NOT EDIT THIS FILE; GENERATE TIME: 2023-10-19T08:18:42.185Z; */
+/* THIS FILE WAS AUTO-GENERATED USING CATALOG EXPORTER; YOU SHOULD NOT EDIT THIS FILE; GENERATE TIME: 2023-10-19T18:27:31.889Z; */
 // @ts-ignore ignore unused imports here if they happen (e.g. when there is no measure in the workspace)
 import {
     newAttribute,
@@ -77,7 +77,7 @@ export const ProductCategory: IAttribute = newAttribute("products.category");
 export const Region: IAttribute = newAttribute("region");
 /**
  * Attribute Title: State
- * Attribute ID: store
+ * Attribute ID: state
  */
 export const State = {
     /**
@@ -87,7 +87,7 @@ export const State = {
     Location: newAttribute("geo__state__location"),
     /**
      * Display Form Title: State
-     * Display Form ID: store
+     * Display Form ID: state
      */ Default: newAttribute("state"),
 };
 /**
