@@ -19,15 +19,15 @@ export const App: React.FC = () => {
         <ChakraProvider>
             <BrowserRouter>
                 <Routes>
+                    <Route path={AppRoutes.Login} Component={LoginPage} />
                     <Route
-                        path={AppRoutes.Home}
+                        path={"*"}
                         element={
                             <PrivateRoute>
                                 <Home />
                             </PrivateRoute>
                         }
                     />
-                    <Route path={AppRoutes.Login} Component={LoginPage} />
                 </Routes>
             </BrowserRouter>
         </ChakraProvider>
