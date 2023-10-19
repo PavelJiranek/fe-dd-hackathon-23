@@ -1,28 +1,24 @@
-import React, { FC, useEffect } from "react";
-import { useBackend } from "@gooddata/sdk-ui";
+import React, { FC } from "react";
 
 import { IWorkspace } from "../types/workspaces.js";
+import { useWorkspaces } from "../hooks/useWorkspaces.js";
 
 interface IWorkspacesListProps {
     workspaces: IWorkspace[];
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const workspaces: IWorkspace[] = [];
-
 export const WorkspacesList: FC<IWorkspacesListProps> = () => {
-    const backend = useBackend();
+    const workspaces = useWorkspaces();
 
-    useEffect(() => {
-        (async () => {
-            const wss = await backend?.workspaces().forCurrentUser().query();
-            console.log("workspaces", wss);
-        })();
-    }, [backend]);
-
+    console.log("workspaces", workspaces);
     return (
         <div>
             <h1>WorkspacesList test</h1>
+            {workspaces.map((workspace) => (
+                <div key={workspace.id}>
+                    <h2>{workspace.id}</h2>
+                </div>
+            ))}
         </div>
     );
 };
