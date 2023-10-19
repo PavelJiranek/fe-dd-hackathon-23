@@ -6,6 +6,7 @@ const { DefinePlugin } = require("webpack");
 const path = require("path");
 const { URL } = require("url");
 const pack = require("./package.json");
+const CopyPlugin = require("copy-webpack-plugin");
 
 require("dotenv").config();
 
@@ -124,6 +125,14 @@ module.exports = (_env, argv) => {
                     template: "./src/public/index.html",
                     favicon: "./src/public/favicon.ico",
                     scriptLoading: "module",
+                }),
+                new CopyPlugin({
+                    patterns: [
+                        {
+                            from: path.resolve(__dirname, "src", "public", "_redirects"),
+                            to: path.join(__dirname, "esm"),
+                        },
+                    ],
                 }),
             ],
             // Some dependencies have invalid source maps, we do not care that much
