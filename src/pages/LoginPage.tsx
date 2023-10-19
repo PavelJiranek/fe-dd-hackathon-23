@@ -34,7 +34,7 @@ export const LoginPage: React.FC = () => {
         formState: { errors },
     } = useForm<IFormInput>({
         defaultValues: {
-            domain: process.env.GOODDATA_HOST ?? "",
+            domain: "",
             token: process.env.TIGER_API_TOKEN ?? "",
         },
     });

@@ -3,6 +3,8 @@ import { Box, Flex, Td, Text, Tr, useTheme } from "@chakra-ui/react";
 
 import { IWorkspace } from "../../types/workspaces.js";
 
+import { WorkspaceListItemActions } from "./WorkspaceListItemActions.js";
+
 interface IWorkspacesListItemProps {
     workspace: IWorkspace;
     childLevel: number;
@@ -17,8 +19,10 @@ const ArrowIcon = () => (
     </svg>
 );
 
-export const WorkspacesListItem: FC<IWorkspacesListItemProps> = ({ workspace: { name, id }, childLevel }) => {
+export const WorkspacesListItem: FC<IWorkspacesListItemProps> = ({ workspace, childLevel }) => {
     const theme = useTheme();
+
+    const { name, id } = workspace;
 
     return (
         <Tr>
@@ -33,7 +37,9 @@ export const WorkspacesListItem: FC<IWorkspacesListItemProps> = ({ workspace: { 
                 </Flex>
             </Td>
             <Td>{id}</Td>
-            <Td>...actions</Td>
+            <Td>
+                <WorkspaceListItemActions workspace={workspace} />
+            </Td>
         </Tr>
     );
 };

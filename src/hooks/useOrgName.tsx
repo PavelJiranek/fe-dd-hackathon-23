@@ -14,7 +14,7 @@ export const useOrgName = () => {
             setOrgName(descriptor?.title || "");
         }
         !orgName && getOrg();
-    }, []);
+    }, [backend, orgName, setOrgName]);
 
     return orgName;
 };

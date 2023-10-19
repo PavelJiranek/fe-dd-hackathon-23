@@ -2,7 +2,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
-const { DefinePlugin } = require("webpack");
 const path = require("path");
 const { URL } = require("url");
 const pack = require("./package.json");
@@ -10,8 +9,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 require("dotenv").config();
 
-const BACKEND_URL = pack.gooddata.hostname;
-const WORKSPACE_ID = pack.gooddata.workspaceId;
+const BACKEND_URL = process.env.GOODDATA_HOST;
 
 module.exports = (_env, argv) => {
     const isProduction = argv.mode === "production";
@@ -118,9 +116,6 @@ module.exports = (_env, argv) => {
             plugins: [
                 new Dotenv(),
                 new CaseSensitivePathsPlugin(),
-                new DefinePlugin({
-                    WORKSPACE_ID: JSON.stringify(WORKSPACE_ID),
-                }),
                 new HtmlWebpackPlugin({
                     template: "./src/public/index.html",
                     favicon: "./src/public/favicon.ico",
