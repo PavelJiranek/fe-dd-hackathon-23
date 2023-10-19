@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import React from "react";
-import { Card, CardBody, CardHeader, Heading } from "@chakra-ui/react";
+import { Card, CardBody, CardHeader, Heading, Text } from "@chakra-ui/react";
 
 import { useWorkspaces } from "../hooks/useWorkspaces.js";
 import { WorkspacesList } from "../components/WorkspacesList/WorkspacesList.js";
@@ -13,20 +13,32 @@ export const WorkspaceDetail = () => {
 
     const { workspaces, loading } = useWorkspaces(workspaceId);
 
+    const [workspace] = workspaces;
+
+    const hasChildren = workspace?.children.length > 0;
+
     return (
         <Layout>
             <BreadCrumb />
             {loading ? (
                 <CenteredLoading />
-            ) : (
+            ) : workspace ? (
                 <Card>
                     <CardHeader>
-                        <Heading size="md">Client Report</Heading>
+                        <Heading size="md">{workspace.name}</Heading>
                     </CardHeader>
                     <CardBody>
-                        <WorkspacesList workspaces={workspaces} />
+                        {hasChildren ? (
+                            <WorkspacesList workspaces={workspace.children} />
+                        ) : (
+                            <p>Workspace has no connected workspaces.</p>
+                        )}
                     </CardBody>
                 </Card>
+            ) : (
+                <Text color="red" p={8}>
+                    Workspace not found
+                </Text>
             )}
         </Layout>
     );
