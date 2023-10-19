@@ -56,6 +56,7 @@ module.exports = (_env, argv) => {
                 library: {
                     type: "module",
                 },
+                publicPath: "auto",
             },
             resolve: {
                 // Alias for ESM imports with .js suffix because
@@ -135,6 +136,7 @@ module.exports = (_env, argv) => {
                 proxy,
                 server: protocol === "https:" ? "https" : "http",
                 open: true,
+                historyApiFallback: true,
             },
         },
     ];

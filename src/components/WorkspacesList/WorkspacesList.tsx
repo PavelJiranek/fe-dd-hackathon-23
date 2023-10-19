@@ -1,16 +1,11 @@
 import React, { FC, Fragment } from "react";
 import { Card, Table, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react";
 
-import { IWorkspace } from "../../types/workspaces.js";
 import { useWorkspaces } from "../../hooks/useWorkspaces.js";
 
 import { renderWorkspacesListItem } from "./WorkspacesListItem.js";
 
-interface IWorkspacesListProps {
-    workspaces: IWorkspace[];
-}
-
-export const WorkspacesList: FC<IWorkspacesListProps> = () => {
+export const WorkspacesList: FC = () => {
     const workspaces = useWorkspaces();
 
     console.log("workspaces", workspaces);

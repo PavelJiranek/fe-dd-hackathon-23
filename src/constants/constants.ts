@@ -3,7 +3,7 @@ export enum AppRoutes {
     Workspaces = "/workspaces",
     UserFilters = "/user-filters",
     Login = "/login",
-    Home = "/",
+    FallBack = "*",
 }
 
 export const LOCAL_STORAGE_KEY = "pink_pages";

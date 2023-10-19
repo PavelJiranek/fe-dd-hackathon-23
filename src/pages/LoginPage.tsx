@@ -42,7 +42,7 @@ export const LoginPage: React.FC = () => {
     const navigate = useNavigate();
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
         setBackend(data.domain, data.token);
-        navigate(AppRoutes.Home);
+        navigate(AppRoutes.Workspaces);
     };
 
     return (

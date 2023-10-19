@@ -1,14 +1,14 @@
 // (C) 2023 GoodData Corporation
 
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 import { LoginPage } from "./pages/LoginPage.js";
 import { useBackendStore } from "./store/useBackendStore.js";
 import { AppRoutes } from "./constants/constants.js";
 import { PrivateRoute } from "./components/PrivateRoute.js";
-import { Home } from "./pages/Home.js";
+import { Workspaces } from "./pages/Workspaces.js";
 import { Environments } from "./pages/Environments.js";
 import { UserFilters } from "./pages/UserFilters.js";
 
@@ -28,16 +28,33 @@ export const App: React.FC = () => {
                 <Routes>
                     <Route path={AppRoutes.Login} Component={LoginPage} />
                     <Route
-                        path={"*"}
+                        path={AppRoutes.Workspaces}
                         element={
                             <PrivateRoute>
-                                <Home />
+                                <Workspaces />
                             </PrivateRoute>
                         }
                     />
-                    <Route path={AppRoutes.Login} Component={LoginPage} />
-                    <Route path={AppRoutes.Environments} Component={Environments} />
-                    <Route path={AppRoutes.UserFilters} Component={UserFilters} />
+                    <Route
+                        path={AppRoutes.Environments}
+                        element={
+                            <PrivateRoute>
+                                <Environments />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path={AppRoutes.UserFilters}
+                        element={
+                            <PrivateRoute>
+                                <UserFilters />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path={AppRoutes.FallBack}
+                        element={<Navigate to={AppRoutes.Workspaces} replace={true} />}
+                    />
                 </Routes>
             </BrowserRouter>
         </ChakraProvider>
