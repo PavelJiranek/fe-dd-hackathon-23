@@ -191,7 +191,7 @@ your own data instead.
     ```
     TIGER_API_TOKEN=<your_api_token>
     ```
-   Make sure you do not commit the `.env` file to your VCS (e.g. Git)
+    Make sure you do not commit the `.env` file to your VCS (e.g. Git)
 3. Refresh [the metadata catalog](https://sdk.gooddata.com/gooddata-ui/docs/export_catalog.html) for the newly configured workspace: `npm run refresh-md`.
 4. Update the `App.tsx`. Since we've switched to your own data, the reference to the insight in `App.tsx` is no longer valid.
    Select a new insight to render from the catalog and update `App.tsx`:
@@ -211,14 +211,14 @@ By default, GoodData React SDK is configured to connect to GoodData Cloud or Goo
     -    import backendFactory, { ContextDeferredAuthProvider } from "@gooddata/sdk-backend-tiger";
     +    import backendFactory, { ContextDeferredAuthProvider } from "@gooddata/sdk-backend-bear";
     ```
-   You'll also need to define a logic on what to do if user is not logged in. The simplest case could look something like this:
+    You'll also need to define a logic on what to do if user is not logged in. The simplest case could look something like this:
     ```diff
     -     backendFactory().withAuthentication(new ContextDeferredAuthProvider()),
     +     backendFactory().withAuthentication(new ContextDeferredAuthProvider(() => {
     +         window.location.replace(`${window.location.origin}/account.html?lastUrl=${encodeURIComponent(window.location.href)}`);
     +     })),
     ```
-   Your setup may vary, see our [documentation on different authentication options GoodData Platform provides](https://sdk.gooddata.com/gooddata-ui/docs/platform_sso.html).
+    Your setup may vary, see our [documentation on different authentication options GoodData Platform provides](https://sdk.gooddata.com/gooddata-ui/docs/platform_sso.html).
 2. Update `./package.json` to specify you're using "bear" backend. Update the hostname and workspaceId to the ones you'd like to connect to:
     ```diff
     -    "hostname": "https://public-examples.gooddata.com",
@@ -235,7 +235,7 @@ By default, GoodData React SDK is configured to connect to GoodData Cloud or Goo
     +    USERNAME=<your-username>
     +    PASSWORD=<your-password>
     ```
-   Make sure you do not commit the `.env` file to your VCS (e.g. Git).
+    Make sure you do not commit the `.env` file to your VCS (e.g. Git).
 4. Refresh [the metadata catalog](https://sdk.gooddata.com/gooddata-ui/docs/export_catalog.html) for the newly configured workspace: `npm run refresh-md`.
 5. Update the `App.tsx`. Since we've switched to your own data, the reference to the insight in `App.tsx` is no longer valid.
    Select a new insight to render from the catalog and update `App.tsx`:

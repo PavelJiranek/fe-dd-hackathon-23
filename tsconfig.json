@@ -16,7 +16,7 @@
         "outDir": "esm",
         "sourceMap": true,
         "suppressImplicitAnyIndexErrors": false,
-        "resolveJsonModule": true       
+        "resolveJsonModule": true
     },
     "compileOnSave": false,
     "exclude": ["**/node_modules", "esm", "**/__mocks__/**/*"]

@@ -1,6 +1,6 @@
 // (C) 2007-2022 GoodData Corporation
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const Dotenv = require('dotenv-webpack');
+const Dotenv = require("dotenv-webpack");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const { DefinePlugin } = require("webpack");
 const path = require("path");
@@ -58,7 +58,6 @@ module.exports = (_env, argv) => {
                 },
             },
             resolve: {
-                
                 // Alias for ESM imports with .js suffix because
                 // `import { abc } from "../abc.js"` may be in fact importing from `abc.tsx` file
                 extensionAlias: {
@@ -123,7 +122,7 @@ module.exports = (_env, argv) => {
                 new HtmlWebpackPlugin({
                     template: "./src/public/index.html",
                     favicon: "./src/public/favicon.ico",
-                    scriptLoading: "module"
+                    scriptLoading: "module",
                 }),
             ],
             // Some dependencies have invalid source maps, we do not care that much

@@ -17,7 +17,13 @@
         "clean": "rm -rf esm *.log",
         "build": "webpack --mode production",
         "start": "webpack-cli serve",
-        "refresh-md": "gdc-catalog-export"
+        "refresh-md": "gdc-catalog-export",
+        "eslint": "eslint -c .eslintrc.cjs src/",
+        "eslint-fix": "eslint -c .eslintrc.cjs --fix src/",
+        "fix": "yarn prettier-fix && yarn eslint-fix",
+        "prettier-check": "yarn prettier --check .",
+        "prettier-fix": "yarn prettier --write .",
+        "prepare": "husky install"
     },
     "dependencies": {
         "@chakra-ui/react": "^2.8.1",
@@ -49,6 +55,8 @@
         "@babel/preset-react": "^7.7.2",
         "@gooddata/catalog-export": "9.2.0",
         "@gooddata/sdk-ui-kit": "9.2.0",
+        "@typescript-eslint/eslint-plugin": "^6.8.0",
+        "@typescript-eslint/parser": "^6.8.0",
         "@types/react": "^18.2.0",
         "@types/react-dom": "^18.2.1",
         "babel-loader": "^8.0.5",
@@ -56,8 +64,18 @@
         "css-loader": "^6.7.1",
         "dotenv": "16.0.3",
         "dotenv-webpack": "^8.0.1",
+        "eslint": "^8.51.0",
+        "eslint-import-resolver-typescript": "^3.6.1",
+        "eslint-plugin-import": "^2.28.1",
+        "eslint-plugin-import-esm": "^1.2.1",
+        "eslint-plugin-prettier": "^5.0.1",
+        "eslint-plugin-react": "^7.33.2",
+        "eslint-plugin-react-hooks": "^4.6.0",
         "html-webpack-plugin": "^5.3.1",
+        "husky": "^8.0.0",
+        "lint-staged": "^15.0.2",
         "process": "^0.11.10",
+        "prettier": "^3.0.3",
         "source-map-loader": "^4.0.0",
         "style-loader": "^3.3.1",
         "ts-loader": "^8.3.0",
@@ -66,5 +84,9 @@
         "webpack": "^5.58.0",
         "webpack-cli": "^4.9.2",
         "webpack-dev-server": "^4.9.1"
+    },
+    "lint-staged": {
+        "*.{js,ts,tsx,json,scss,md,yaml,html}": "prettier --write",
+        "*.{ts,js,tsx,jsx}": "eslint --fix"
     }
 }
