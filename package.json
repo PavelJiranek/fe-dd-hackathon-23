@@ -8,8 +8,8 @@
     "exports": "./esm/index.js",
     "types": "./esm/index.d.ts",
     "gooddata": {
-        "hostname": "https://public-examples.gooddata.com",
-        "workspaceId": "demo",
+        "hostname": "https://jav.demo.cloud.gooddata.com",
+        "workspaceId": "ws-snowflake-demo",
         "backend": "tiger",
         "catalogOutput": "src/catalog.ts"
     },
