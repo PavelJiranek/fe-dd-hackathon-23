@@ -4,7 +4,7 @@ import { useBackendStore } from "../store/useBackendStore.js";
 import { fetchWorkspaces } from "../utils/api.js";
 import { IWorkspace } from "../types/workspaces.js";
 
-const defaultWorkspaces = [
+const defaultWorkspaces: IWorkspace[] = [
     {
         id: "a318879ef4e043d6958ef7eae898c0dd",
         name: "NLG scenario",
