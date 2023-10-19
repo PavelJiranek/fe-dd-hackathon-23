@@ -14,6 +14,7 @@ import { UserFilters } from "./pages/UserFilters.js";
 
 const colors = {
     primary: "#D53F8C",
+    primaryDarker: "#A8336E",
 };
 
 export const App: React.FC = () => {

@@ -22,6 +22,7 @@ export const MenuLink: React.FC<{
             // leftIcon={<Icon isActive={isActive} />}
             leftIcon={renderIcon(isActive)}
             onClick={() => navigate(route)}
+            _hover={{ textDecoration: "none" }}
             fontSize={"18px"}
             fontWeight={isActive ? "bold" : "400"}
         >
