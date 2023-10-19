@@ -6,5 +6,6 @@ export const fetchWorkspaces = async (token: string) => {
             Authorization: `Bearer ${token}`,
         },
     });
+
     return await response.json();
 };

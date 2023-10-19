@@ -1,10 +1,10 @@
-import React, { FC } from "react";
+import React, { FC, Fragment } from "react";
 import { Card, Table, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react";
 
 import { IWorkspace } from "../../types/workspaces.js";
 import { useWorkspaces } from "../../hooks/useWorkspaces.js";
 
-import { WorkspacesListItem } from "./WorkspacesListItem.js";
+import { renderWorkspacesListItem } from "./WorkspacesListItem.js";
 
 interface IWorkspacesListProps {
     workspaces: IWorkspace[];
@@ -14,6 +14,7 @@ export const WorkspacesList: FC<IWorkspacesListProps> = () => {
     const workspaces = useWorkspaces();
 
     console.log("workspaces", workspaces);
+
     return (
         <Card>
             <TableContainer style={{ padding: "1rem" }}>
@@ -27,7 +28,7 @@ export const WorkspacesList: FC<IWorkspacesListProps> = () => {
                     </Thead>
                     <Tbody>
                         {workspaces.map((ws) => (
-                            <WorkspacesListItem key={ws.id} workspace={ws} />
+                            <Fragment key={ws.id}>{renderWorkspacesListItem(ws)}</Fragment>
                         ))}
                     </Tbody>
                 </Table>
