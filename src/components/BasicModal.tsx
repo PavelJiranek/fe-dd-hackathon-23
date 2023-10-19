@@ -52,9 +52,15 @@ export const BasicModal: React.FC<IModal> = ({
                     <ModalBody>
                         {type === "radio" ? (
                             <RadioGroup onChange={setValue} value={value}>
-                                <Stack direction="column">
+                                <Stack direction="column" padding={"1.5rem"}>
                                     {content.map((item) => (
-                                        <Radio key={item.label} value={item.label} fontSize={"16px"}>
+                                        <Radio
+                                            key={item.label}
+                                            value={item.label}
+                                            size={"lg"}
+                                            fontSize={"16px"}
+                                            colorScheme={"pink"}
+                                        >
                                             {item.label}
                                         </Radio>
                                     ))}
