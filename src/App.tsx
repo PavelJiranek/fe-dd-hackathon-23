@@ -5,7 +5,6 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 import { LoginPage } from "./pages/LoginPage.js";
-import { useBackendStore } from "./store/useBackendStore.js";
 import { AppRoutes } from "./constants/constants.js";
 import { PrivateRoute } from "./components/PrivateRoute.js";
 import { Workspaces } from "./pages/Workspaces.js";
@@ -20,9 +19,6 @@ const colors = {
 
 export const App: React.FC = () => {
     const theme = extendTheme({ colors });
-    const store = useBackendStore();
-
-    console.log(store);
 
     return (
         <ChakraProvider theme={theme}>
