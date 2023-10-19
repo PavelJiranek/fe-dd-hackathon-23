@@ -14,6 +14,8 @@ interface IBackendStore {
     authenticated: boolean;
     clearStore: () => void;
     setBackend: (domain: string, token: string) => void;
+    orgName: string;
+    setOrgName: (orgName: string) => void;
 }
 
 const getStoredCredentials = () => {
@@ -31,7 +33,7 @@ const getStoredCredentials = () => {
 
 const getDefaultStore = (): Pick<
     IBackendStore,
-    "domain" | "token" | "backend" | "error" | "authenticated"
+    "domain" | "token" | "backend" | "error" | "authenticated" | "orgName"
 > => {
     const stored = getStoredCredentials();
     return {
@@ -40,11 +42,13 @@ const getDefaultStore = (): Pick<
         backend: null,
         error: null,
         authenticated: !!stored,
+        orgName: "",
     };
 };
 
 export const useBackendStore = create<IBackendStore>((set) => ({
     ...getDefaultStore(),
+    setOrgName: (orgName) => set({ orgName }),
     setBackend: (domain, token) =>
         set(() => {
             let error = null;
